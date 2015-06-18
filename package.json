@@ -1,6 +1,6 @@
 {
   "name": "excerpt-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get the Excerpt from a markdown file (like in jekyll or *smith)",
   "main": "index.js",
   "scripts": {
