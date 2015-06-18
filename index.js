@@ -43,16 +43,6 @@ function getExcerptByFirstParagraph(html) {
     return excerpt;
 }
 
-
-/**
- * Check if a filename has an html extension
- * @param  {String}  filename path to check
- * @return {Boolean}          test result
- */
-function isHtml(filename) {
-    return /\.html?/.test(path.extname(filename)) ? true : false;
-}
-
 module.exports = function excerptHtml(html, options) {
     if (!options) {
         options = {}
