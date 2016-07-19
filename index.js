@@ -1,14 +1,13 @@
-"use strict";
+'use strict'
 /**
  * Extracted from https://github.com/simbo/metalsmith-better-excerpts
  * (published under MIT license)
  */
 
-var cheerio = require('cheerio');
-var unescapeHTML = require("underscore.string/unescapeHTML");
-var stripTags = require("underscore.string/stripTags");
-var prune = require("underscore.string/prune");
-var path = require('path');
+var cheerio = require('cheerio')
+var unescapeHTML = require('underscore.string/unescapeHTML')
+var stripTags = require('underscore.string/stripTags')
+var prune = require('underscore.string/prune')
 
 /**
  * retrieve excerpt from file object by extracting contents until a 'more' tag
@@ -16,49 +15,48 @@ var path = require('path');
  * @param  {RegExp} regExp 'more' tag regexp
  * @return {mixed}         excerpt string or false
  */
-function getExcerptByMoreTag(html, regExp) {
-    var excerpt = false;
-    html = cheerio.load('<root>' + html + '</root>')('root').html();
-    var match = html.search(regExp);
-    if (match > -1) {
-        excerpt = html.slice(0, Buffer.byteLength(html.slice(0, match)));
-        excerpt = unescapeHTML(excerpt);
-    }
-    return excerpt;
+function getExcerptByMoreTag (html, regExp) {
+  var excerpt = false
+  html = cheerio.load('<root>' + html + '</root>')('root').html()
+  var match = html.search(regExp)
+  if (match > -1) {
+    excerpt = html.slice(0, Buffer.byteLength(html.slice(0, match)))
+    excerpt = unescapeHTML(excerpt)
+  }
+  return excerpt
 }
-
 
 /**
  * retrieve excerpt from file object by extracting the first p's contents
  * @param  {Object} file file object
  * @return {mixed}       excerpt string or false
  */
-function getExcerptByFirstParagraph(html) {
-    var $ = cheerio.load(html),
-        p = $('p').first(),
-        excerpt = p.length ? p.html().trim() : false;
-    if (excerpt) {
-        excerpt = unescapeHTML(excerpt);
-    }
-    return excerpt;
+function getExcerptByFirstParagraph (html) {
+  var $ = cheerio.load(html)
+  var p = $('p').first()
+  var excerpt = p.length ? p.html().trim() : false
+  if (excerpt) {
+    excerpt = unescapeHTML(excerpt)
+  }
+  return excerpt
 }
 
-module.exports = function excerptHtml(html, options) {
-    if (!options) {
-        options = {}
+module.exports = function excerptHtml (html, options) {
+  if (!options) {
+    options = {}
+  }
+  options = {
+    moreRegExp: options.moreRegExp || /\s*<!--\s*more\s*-->/i,
+    stripTags: options.stripTags !== false,
+    pruneLength: typeof options.pruneLength === 'number' ? options.pruneLength : 140,
+    pruneString: typeof options.pruneString === 'string' ? options.pruneString : '…'
+  }
+  var excerpt = getExcerptByMoreTag(html) || getExcerptByFirstParagraph(html, options.moreRegExp)
+  if (options.stripTags) {
+    excerpt = stripTags(excerpt)
+    if (options.pruneLength > 0 && options.pruneString) {
+      excerpt = prune(excerpt, options.pruneLength, options.pruneString)
     }
-    options = {
-        moreRegExp: options.moreRegExp || /\s*<!--\s*more\s*-->/i,
-        stripTags:  options.stripTags !== false,
-        pruneLength: typeof options.pruneLength === 'number' ? options.pruneLength : 140,
-        pruneString: typeof options.pruneString === 'string' ? options.pruneString : '…'
-    };
-    var excerpt = getExcerptByMoreTag(html) || getExcerptByFirstParagraph(html, options.moreRegExp);
-    if (options.stripTags) {
-        excerpt = stripTags(excerpt);
-        if (options.pruneLength > 0 && options.pruneString) {
-            excerpt = prune(excerpt, options.pruneLength, options.pruneString);
-        }
-    }
-    return excerpt;
-};
+  }
+  return excerpt
+}

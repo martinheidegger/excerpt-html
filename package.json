@@ -4,7 +4,8 @@
   "description": "Get the Excerpt from a markdown file (like in jekyll or *smith)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "lint": "standard"
   },
   "keywords": [
     "markdown",
@@ -17,7 +18,10 @@
     "cheerio": "^0.20.0",
     "underscore.string": "^3.3.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^7.1.2",
+    "tap": "^6.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/martinheidegger/excerpt-html.git"
