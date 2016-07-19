@@ -5,9 +5,9 @@
  */
 
 var cheerio = require('cheerio')
-var unescapeHTML = require('underscore.string/unescapeHTML')
-var stripTags = require('underscore.string/stripTags')
-var prune = require('underscore.string/prune')
+var unescapeHTML = require('lodash.unescape')
+var stripTags = require('striptags')
+var truncate = require('lodash.truncate')
 
 /**
  * retrieve excerpt from file object by extracting contents until a 'more' tag
@@ -34,7 +34,7 @@ function getExcerptByMoreTag (html, regExp) {
 function getExcerptByFirstParagraph (html) {
   var $ = cheerio.load(html)
   var p = $('p').first()
-  var excerpt = p.length ? p.html().trim() : false
+  var excerpt = p.length ? p.html().trim() : html
   if (excerpt) {
     excerpt = unescapeHTML(excerpt)
   }
@@ -45,17 +45,19 @@ module.exports = function excerptHtml (html, options) {
   if (!options) {
     options = {}
   }
-  options = {
-    moreRegExp: options.moreRegExp || /\s*<!--\s*more\s*-->/i,
-    stripTags: options.stripTags !== false,
-    pruneLength: typeof options.pruneLength === 'number' ? options.pruneLength : 140,
-    pruneString: typeof options.pruneString === 'string' ? options.pruneString : '…'
+  var excerpt = getExcerptByMoreTag(html, options.moreRegExp || /\s*<!--\s*more\s*-->/i)
+  if (!excerpt) {
+    excerpt = getExcerptByFirstParagraph(html)
   }
-  var excerpt = getExcerptByMoreTag(html) || getExcerptByFirstParagraph(html, options.moreRegExp)
-  if (options.stripTags) {
+  if (options.stripTags !== false) {
     excerpt = stripTags(excerpt)
-    if (options.pruneLength > 0 && options.pruneString) {
-      excerpt = prune(excerpt, options.pruneLength, options.pruneString)
+    var pruneLength = typeof options.pruneLength === 'number' ? options.pruneLength : 140
+    if (pruneLength > 0) {
+      excerpt = truncate(excerpt, {
+        length: pruneLength,
+        omission: typeof options.pruneString === 'string' ? options.pruneString : '…',
+        separator: typeof options.pruneSeparator === 'string' ? options.pruneSeparator : ' '
+      })
     }
   }
   return excerpt

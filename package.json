@@ -4,7 +4,9 @@
   "description": "Get the Excerpt from a markdown file (like in jekyll or *smith)",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint",
+    "test": "npm run lint && tap --coverage test/**",
+    "quick": "tap test/**",
+    "coverage": "tap --coverage --coverage-report=html test/**",
     "lint": "standard"
   },
   "keywords": [
@@ -16,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^0.20.0",
-    "underscore.string": "^3.3.4"
+    "lodash.truncate": "^4.3.0",
+    "lodash.unescape": "^4.0.0",
+    "striptags": "^2.1.1"
   },
   "devDependencies": {
     "standard": "^7.1.2",

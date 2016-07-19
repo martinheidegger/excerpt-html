@@ -32,6 +32,7 @@ excerptHtml(htmlCode, {
     stripTags:   true, // Set to false to get html code
     pruneLength: 140, // Amount of characters that the excerpt should contain
     pruneString: '…', // Character that will be added to the pruned string
+    pruneSeparator: ' ', // Separator to be used to separate words
 })
 ```
 
