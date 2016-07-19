@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/martinheidegger/excerpt-html.svg?branch=master)](https://travis-ci.org/martinheidegger/excerpt-html)
+[![Coverage Status](https://coveralls.io/repos/github/martinheidegger/excerpt-html/badge.svg?branch=master)](https://coveralls.io/github/martinheidegger/excerpt-html?branch=master)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 # excerpt-html
