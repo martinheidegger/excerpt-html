@@ -5,7 +5,7 @@
  */
 
 var cheerio = require('cheerio')
-var unescapeHTML = require('lodash.unescape')
+var unescapeHTML = require('he').unescape
 var stripTags = require('striptags')
 var truncate = require('lodash.truncate')
 

@@ -18,8 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^0.20.0",
+    "he": "^1.1.0",
     "lodash.truncate": "^4.3.0",
-    "lodash.unescape": "^4.0.0",
     "striptags": "^2.1.1"
   },
   "devDependencies": {

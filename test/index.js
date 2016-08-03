@@ -79,6 +79,11 @@ test('cropping stripped html tags doesnt work', function (t) {
   t.end()
 })
 
+test('unescaping should work for all characters', function (t) {
+  t.equal(excerptHtml('Hello &amp; World &ouml; &hearts;'), 'Hello & World ö ♥')
+  t.end()
+})
+
 test('dont prune text if pruneLength is < 1', function (t) {
   var longString = 'This is text. This text is longer than 140 characters, the default value for' +
     'this method. If pruneLength is set to a number < 1 it will ignore the default' +
