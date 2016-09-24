@@ -100,3 +100,11 @@ test('empty text', function (t) {
   }), '')
   t.end()
 })
+
+test('make sure that empty tags are removed', function (t) {
+  t.equal(excerptHtml('<p><img></img> <img></img> test <img></img> </p>', {
+    stripTags: true
+  }), 'test')
+  t.end()
+})
+
