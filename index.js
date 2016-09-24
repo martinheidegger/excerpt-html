@@ -51,6 +51,7 @@ module.exports = function excerptHtml (html, options) {
   }
   if (options.stripTags !== false) {
     excerpt = stripTags(excerpt)
+    excerpt = excerpt.replace(/^\s+|\s+$|\s+(?=\s)/g, '')
     var pruneLength = typeof options.pruneLength === 'number' ? options.pruneLength : 140
     if (pruneLength > 0) {
       excerpt = truncate(excerpt, {
