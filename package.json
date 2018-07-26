@@ -1,5 +1,5 @@
 {
-  "name": "excerpt-html",
+  "name": "@canner/excerpt-html",
   "version": "1.2.0",
   "description": "Get the Excerpt from a markdown file (like in jekyll or *smith)",
   "main": "index.js",
@@ -17,7 +17,7 @@
   "author": "Martin Heidegger <martin.heidegger@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^0.20.0",
+    "cheerio": "^0.22.0",
     "he": "^1.1.0",
     "lodash.truncate": "^4.3.0",
     "striptags": "^2.1.1"
