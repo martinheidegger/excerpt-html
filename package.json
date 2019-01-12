@@ -21,7 +21,7 @@
     "cheerio": "^0.22.0",
     "he": "^1.1.0",
     "lodash.truncate": "^4.3.0",
-    "striptags": "^2.1.1"
+    "striptags": "^2.2.1"
   },
   "devDependencies": {
     "standard": "^12.0.1",
