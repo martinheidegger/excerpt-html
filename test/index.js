@@ -107,3 +107,8 @@ test('make sure that empty tags are removed', function (t) {
   }), 'test')
   t.end()
 })
+
+test('using a custom regExp to cut the excertp', function (t) {
+  t.equals(excerptHtml('a $ b c', { moreRegExp: /\$/ }), 'a')
+  t.end()
+})

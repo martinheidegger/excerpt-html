@@ -4,7 +4,8 @@
   "description": "Get the Excerpt from a markdown file (like in jekyll or *smith)",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && tap --coverage test/**",
+    "test": "npm run lint && tap test/**",
+    "ci": "npm run test -- --cov --coverage-report=lcov",
     "quick": "tap test/**",
     "coverage": "tap --coverage --coverage-report=html test/**",
     "lint": "standard"
