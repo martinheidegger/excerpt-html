@@ -107,4 +107,3 @@ test('make sure that empty tags are removed', function (t) {
   }), 'test')
   t.end()
 })
-
