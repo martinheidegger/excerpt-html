@@ -17,7 +17,8 @@
   "author": "Martin Heidegger <martin.heidegger@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^0.20.0",
+    "acorn": "^6.0.5",
+    "cheerio": "^0.22.0",
     "he": "^1.1.0",
     "lodash.truncate": "^4.3.0",
     "striptags": "^2.1.1"
