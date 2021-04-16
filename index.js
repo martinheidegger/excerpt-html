@@ -31,12 +31,15 @@ function getExcerptByMoreTag (html, regExp) {
  */
 function getExcerptByFirstParagraph (html) {
   var $ = cheerio.load(html)
-  var p = $('p').first()
-  var excerpt = p.length ? p.html().trim() : html
-  if (excerpt) {
-    excerpt = unescapeHTML(excerpt)
+  var isEmpty = (element) => {
+    return $(element).text().trim().length === 0;
   }
-  return excerpt
+  var p = $('p').filter((_index, element) => {
+    return !isEmpty(element);
+  }).first();
+
+  var excerpt = p.length ? p.html().trim() : html
+  return unescapeHTML(excerpt);
 }
 
 /**

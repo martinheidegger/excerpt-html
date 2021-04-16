@@ -112,3 +112,9 @@ test('using a custom regExp to cut the excertp', function (t) {
   t.equals(excerptHtml('a $ b c', { moreRegExp: /\$/ }), 'a')
   t.end()
 })
+
+test('ignore empty first paragraphs', function (t) {
+  t.equals(excerptHtml('<p><img src="cat.png" /></p><p><img src="dog.png" /></p><p>test</p>', { 
+  }), 'test')
+  t.end()
+})
