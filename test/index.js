@@ -1,7 +1,7 @@
 'use strict'
 
-var test = require('tap').test
-var excerptHtml = require('..')
+const test = require('tap').test
+const excerptHtml = require('..')
 
 test('documentation example', function (t) {
   t.equal(excerptHtml('<p>Hello world</p>'), 'Hello world')
@@ -85,7 +85,7 @@ test('unescaping should work for all characters', function (t) {
 })
 
 test('dont prune text if pruneLength is < 1', function (t) {
-  var longString = 'This is text. This text is longer than 140 characters, the default value for' +
+  const longString = 'This is text. This text is longer than 140 characters, the default value for' +
     'this method. If pruneLength is set to a number < 1 it will ignore the default' +
     'limit of 140. Let us make the text a little longer.'
   t.equal(excerptHtml(longString, {
@@ -114,7 +114,12 @@ test('using a custom regExp to cut the excertp', function (t) {
 })
 
 test('ignore empty first paragraphs', function (t) {
-  t.equals(excerptHtml('<p><img src="cat.png" /></p><p><img src="dog.png" /></p><p>test</p>', { 
-  }), 'test')
+  t.equals(
+    excerptHtml(
+      '<p><img src="cat.png" /></p><p><img src="dog.png" /></p><p>test</p>'
+      , {}
+    ),
+    'test'
+  )
   t.end()
 })

@@ -4,10 +4,10 @@
  * (published under MIT license)
  */
 
-var cheerio = require('cheerio')
-var unescapeHTML = require('he').unescape
-var stripTags = require('striptags')
-var truncate = require('lodash.truncate')
+const cheerio = require('cheerio')
+const unescapeHTML = require('he').unescape
+const stripTags = require('striptags')
+const truncate = require('lodash.truncate')
 
 /**
  * retrieve excerpt from file object by extracting contents until a 'more' tag
@@ -17,9 +17,9 @@ var truncate = require('lodash.truncate')
  */
 function getExcerptByMoreTag (html, regExp) {
   html = cheerio.load('<root>' + html + '</root>')('root').html()
-  var match = html.search(regExp)
+  const match = html.search(regExp)
   if (match > -1) {
-    var excerpt = html.slice(0, Buffer.byteLength(html.slice(0, match)))
+    const excerpt = html.slice(0, Buffer.byteLength(html.slice(0, match)))
     return unescapeHTML(excerpt)
   }
 }
@@ -30,16 +30,14 @@ function getExcerptByMoreTag (html, regExp) {
  * @return {string}       excerpt string
  */
 function getExcerptByFirstParagraph (html) {
-  var $ = cheerio.load(html)
-  var isEmpty = (element) => {
-    return $(element).text().trim().length === 0;
-  }
-  var p = $('p').filter((_index, element) => {
-    return !isEmpty(element);
-  }).first();
+  const $ = cheerio.load(html)
+  const isEmpty = element => $(element).text().trim().length === 0
+  const p = $('p').filter(
+    (_index, element) => !isEmpty(element)
+  ).first()
 
-  var excerpt = p.length ? p.html().trim() : html
-  return unescapeHTML(excerpt);
+  const excerpt = p.length ? p.html().trim() : html
+  return unescapeHTML(excerpt)
 }
 
 /**
@@ -53,7 +51,7 @@ function getExcerptByFirstParagraph (html) {
 function stripTagsFromExcerpt (excerpt, options) {
   excerpt = stripTags(excerpt)
   excerpt = excerpt.replace(/^\s+|\s+$|\s+(?=\s)/g, '')
-  var pruneLength = typeof options.pruneLength === 'number' ? options.pruneLength : 140
+  const pruneLength = typeof options.pruneLength === 'number' ? options.pruneLength : 140
   if (pruneLength > 0) {
     excerpt = truncate(excerpt, {
       length: pruneLength,
@@ -94,7 +92,7 @@ module.exports = function excerptHtml (html, options) {
   if (!options) {
     options = {}
   }
-  var rawExcerpt = getRawExcerpt(html, options.moreRegExp)
+  const rawExcerpt = getRawExcerpt(html, options.moreRegExp)
   if (options.stripTags === false) {
     return rawExcerpt
   }
