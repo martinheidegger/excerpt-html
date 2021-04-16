@@ -1,6 +1,6 @@
 {
   "name": "excerpt-html",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Get the Excerpt from a markdown file (like in jekyll or *smith)",
   "main": "index.js",
   "scripts": {
@@ -12,11 +12,15 @@
   },
   "keywords": [
     "markdown",
+    "blog",
     "excerpt",
-    "text-prrocessing"
+    "text-processing"
   ],
   "author": "Martin Heidegger <martin.heidegger@gmail.com>",
-  "license": "ISC",
+  "contributors": [
+    "Tim Carry"
+  ],
+  "license": "MIT",
   "dependencies": {
     "cheerio": "^0.22.0",
     "he": "^1.1.0",
